@@ -80,7 +80,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 
 scaler = torch.cuda.amp.GradScaler()  # For mixed precision training
-num_epochs = 5
+num_epochs = 10
 
 for epoch in range(num_epochs):
     model.train()
@@ -133,7 +133,6 @@ for epoch in range(num_epochs):
 
             val_loss += loss.item()
 
-            # Collect predictions for metrics
             preds = torch.sigmoid(outputs).detach().cpu().numpy()
             all_preds.extend((preds > 0.5).astype(int))
             all_labels.extend(labels.cpu().numpy())
